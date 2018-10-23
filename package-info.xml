@@ -5,15 +5,25 @@
 	<id>Dougiefresh:NoAttachLimit</id>
 	<name>No Attachment Limits For Membergroups</name>
 	<type>modification</type>
-	<version>1.3</version>
+	<version>1.4</version>
 
 	<install for="2.0 - 2.0.99">
 		<readme parsebbc="true">readme.txt</readme>
-		<modification>install.xml</modification>
+		<modification>install_20x.xml</modification>
 		<modification>language.english.xml</modification>
 	</install>
 	<uninstall for="2.0 - 2.0.99">
-		<modification reverse="true">install.xml</modification>
+		<modification reverse="true">install_20x.xml</modification>
+		<modification reverse="true">language.english.xml</modification>
+	</uninstall>
+
+	<install for="2.1 Beta 1">
+		<readme parsebbc="true">readme.txt</readme>
+		<modification>install_21x.xml</modification>
+		<modification>language.english.xml</modification>
+	</install>
+	<uninstall for="2.1 Beta 1">
+		<modification reverse="true">install_21x.xml</modification>
 		<modification reverse="true">language.english.xml</modification>
 	</uninstall>
 </package-info>
