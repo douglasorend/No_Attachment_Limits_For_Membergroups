@@ -9,7 +9,7 @@
 	<operation>
 		<search position="end" />
 		<add><![CDATA[
-$txt['permissionname_post_no_attachment_limit'] = 'No Post attachment limits';
+$txt['permissionname_post_no_attachment_limit'] = 'No Attachment limits';
 $txt['permissionhelp_post_no_attachment_limit'] = 'When checked, the following limits don\'t apply to selected membergroups:<br />o Maxmimum number of attachments per post<br />o Maxmimum attachment file size<br />o Maxmimum size of all attachments per post<br />o Allowed attachment extensions';
 $txt['permissionname_pm_no_attachment_limit'] = 'No PM attachment limits';
 $txt['permissionhelp_pm_no_attachment_limit'] = 'When checked, the following limits don\'t apply to selected membergroups:<br />o Maxmimum number of attachments per PM<br />o Maxmimum attachment file size<br />o Maxmimum size of all attachments per PM<br />o Allowed attachment extensions';
@@ -20,7 +20,7 @@ $txt['permissionhelp_pm_no_attachment_limit'] = 'When checked, the following lim
 	<operation>
 		<search position="end" />
 		<add><![CDATA[
-$txt['permissionname_post_no_attachment_limit'] = 'No Post attachment limits';
+$txt['permissionname_post_no_attachment_limit'] = 'No Attachment limits';
 $txt['permissionhelp_post_no_attachment_limit'] = 'When checked, the following limits don\'t apply to selected membergroups:<br />o Maxmimum number of attachments per post<br />o Maxmimum attachment file size<br />o Maxmimum size of all attachments per post<br />o Allowed attachment extensions';
 $txt['permissionname_pm_no_attachment_limit'] = 'No PM attachment limits';
 $txt['permissionhelp_pm_no_attachment_limit'] = 'When checked, the following limits don\'t apply to selected membergroups:<br />o Maxmimum number of attachments per PM<br />o Maxmimum attachment file size<br />o Maxmimum size of all attachments per PM<br />o Allowed attachment extensions';
