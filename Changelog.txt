@@ -1,3 +1,6 @@
+v1.5 - October 2nd, 2016
+o Fixed several undefined element errors found by [url=http://www.simplemachines.org/community/index.php?action=profile;u=332219]Westwegoman[/url].
+
 v1.4 - April 5th, 2015
 o Updated for SMF 2.1 Beta 1
 

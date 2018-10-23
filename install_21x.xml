@@ -64,11 +64,11 @@
 <file name="$themedir/Post.template.php">
 	<operation>
 		<search position="replace"><![CDATA[if ($context['num_allowed_attachments'] > 0 || !empty($context['dont_show_them']))]]></search>
-		<add><![CDATA[if ($context['no_attachment_limit'] || $context['num_allowed_attachments'] > 0 || !empty($context['dont_show_them']))]]></add>
+		<add><![CDATA[if (!empty($context['no_attachment_limit']) || $context['num_allowed_attachments'] > 0 || !empty($context['dont_show_them']))]]></add>
 	</operation>
 	<operation>
 		<search position="replace"><![CDATA[if ($context['num_allowed_attachments'] > 1)]]></search>
-		<add><![CDATA[if ($context['no_attachment_limit'] || $context['num_allowed_attachments'] > 1)]]></add>
+		<add><![CDATA[if (!empty($context['no_attachment_limit']) || $context['num_allowed_attachments'] > 1)]]></add>
 	</operation>
 	<operation>
 		<search position="replace"><![CDATA[var allowed_attachments = ', $context['num_allowed_attachments'], ';]]></search>
