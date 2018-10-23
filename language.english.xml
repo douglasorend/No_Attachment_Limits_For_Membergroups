@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+<modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
+<id>Dougiefresh:NoAttachLimit</id>
+<name>No Post or PM Attachment Limits for Admin</name>
+<version>1.0</version>
+
+<file name="$languagedir/ManagePermissions.english.php">
+	<operation>
+		<search position="end" />
+		<add><![CDATA[
+$txt['permissionname_post_no_attachment_limit'] = 'No Post attachment limits';
+$txt['permissionhelp_post_no_attachment_limit'] = 'When checked, the following limits don\'t apply to selected membergroups:<br />o Maxmimum number of attachments per post<br />o Maxmimum attachment file size<br />o Maxmimum size of all attachments per post<br />o Allowed attachment extensions';
+$txt['permissionname_pm_no_attachment_limit'] = 'No PM attachment limits';
+$txt['permissionhelp_pm_no_attachment_limit'] = 'When checked, the following limits don\'t apply to selected membergroups:<br />o Maxmimum number of attachments per PM<br />o Maxmimum attachment file size<br />o Maxmimum size of all attachments per PM<br />o Allowed attachment extensions';
+]]></add>
+	</operation>
+</file>
+<file name="$languagedir/ManagePermissions.english_utf8.php" error="skip">
+	<operation>
+		<search position="end" />
+		<add><![CDATA[
+$txt['permissionname_post_no_attachment_limit'] = 'No Post attachment limits';
+$txt['permissionhelp_post_no_attachment_limit'] = 'When checked, the following limits don\'t apply to selected membergroups:<br />o Maxmimum number of attachments per post<br />o Maxmimum attachment file size<br />o Maxmimum size of all attachments per post<br />o Allowed attachment extensions';
+$txt['permissionname_pm_no_attachment_limit'] = 'No PM attachment limits';
+$txt['permissionhelp_pm_no_attachment_limit'] = 'When checked, the following limits don\'t apply to selected membergroups:<br />o Maxmimum number of attachments per PM<br />o Maxmimum attachment file size<br />o Maxmimum size of all attachments per PM<br />o Allowed attachment extensions';
+]]></add>
+	</operation>
+</file>
+</modification>

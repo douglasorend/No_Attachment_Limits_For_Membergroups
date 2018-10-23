@@ -1,0 +1,161 @@
+<?xml version="1.0"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+<modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
+<id>Dougiefresh:NoAttachLimit</id>
+<name>No Post or PM Attachment Limits for Admin</name>
+<version>1.0</version>
+
+<file name="$sourcedir/ManagePermissions.php">
+	<operation error="ignore">
+		<search position="before"><![CDATA['pm_post_attachments' => array(false, 'pm', 'use_pm_system'),]]></search>
+		<add><![CDATA[
+			'pm_no_attachment_limit' => array(false, 'pm', 'use_pm_system'),]]></add>
+	</operation>
+	<operation>
+		<search position="before"><![CDATA['post_attachment' => array(false, 'attachment', 'attach'),]]></search>
+		<add><![CDATA[
+			'post_no_attachment_limit' => array(false, 'attachment', 'attach'),]]></add>
+	</operation>
+	<operation>
+		<search position="replace"><![CDATA['approve_posts',
+	);]]></search>
+		<add><![CDATA['approve_posts',
+		'pm_no_attachment_limit',
+		'post_no_attachment_limit',
+	);]]></add>
+	</operation>
+</file>
+<file name="$sourcedir/PersonalMessage.php">
+	<operation>
+		<search position="replace"><![CDATA[$context['menu_data_' . $context['pm_menu_id']]['current_area'] = 'send';]]></search>
+		<add><![CDATA[$context['menu_data_' . $context['pm_menu_id']]['current_area'] = 'send';
+	$context['no_attachment_limit'] = allowedTo('pm_no_attachment_limit');]]></add>
+	</operation>
+	<operation error="ignore">
+		<search position="replace"><![CDATA[if (!empty($modSettings['pmAttachmentSizeLimit']) && $_FILES['attachment']['size'][$n] > $modSettings['pmAttachmentSizeLimit'] * 1024)]]></search>
+		<add><![CDATA[if (!$context['no_attachment_limit'] && !empty($modSettings['pmAttachmentSizeLimit']) && $_FILES['attachment']['size'][$n] > $modSettings['pmAttachmentSizeLimit'] * 1024)]]></add>
+	</operation>
+	<operation error="ignore">
+		<search position="replace"><![CDATA[if (!empty($modSettings['attachmentNumPerPMLimit']) && $quantity > $modSettings['attachmentNumPerPMLimit'])]]></search>
+		<add><![CDATA[if (!$context['no_attachment_limit'] && !empty($modSettings['attachmentNumPerPMLimit']) && $quantity > $modSettings['attachmentNumPerPMLimit'])]]></add>
+	</operation>
+	<operation error="ignore">
+		<search position="replace"><![CDATA[if (!empty($modSettings['attachmentPMLimit']) && $total_size > $modSettings['attachmentPMLimit'] * 1024)]]></search>
+		<add><![CDATA[if (!$context['no_attachment_limit'] && !empty($modSettings['attachmentPMLimit']) && $total_size > $modSettings['attachmentPMLimit'] * 1024)]]></add>
+	</operation>
+	<operation error="ignore">
+		<search position="replace"><![CDATA[if (!empty($modSettings['pmAttachmentCheckExtensions']))]]></search>
+		<add><![CDATA[if (!$context['no_attachment_limit'] && !empty($modSettings['pmAttachmentCheckExtensions']))]]></add>
+	</operation>
+	<operation error="ignore">
+		<search position="replace"><![CDATA[$context['num_allowed_attachments'] = empty($modSettings['attachmentNumPerPMLimit']) ? 50 : min($modSettings['attachmentNumPerPMLimit'] - count($context['current_attachments']) + (isset($deleted_attachments) ? $deleted_attachments : 0), $modSettings['attachmentNumPerPMLimit']);]]></search>
+		<add><![CDATA[$context['num_allowed_attachments'] = ($context['no_attachment_limit'] || empty($modSettings['attachmentNumPerPMLimit'])) ? 50 : min($modSettings['attachmentNumPerPMLimit'] - count($context['current_attachments']) + (isset($deleted_attachments) ? $deleted_attachments : 0), $modSettings['attachmentNumPerPMLimit']);]]></add>
+	</operation>
+	<operation>
+		<search position="replace"><![CDATA[// Extract out the spam settings - it saves database space!]]></search>
+		<add><![CDATA[
+	$context['no_attachment_limit'] = allowedTo('pm_no_attachment_limit');
+	
+	// Extract out the spam settings - it saves database space!]]></add>
+	</operation>
+	<operation error="ignore">
+		<search position="replace"><![CDATA[if (!empty($modSettings['attachmentNumPerPMLimit']) && $quantity > $modSettings['attachmentNumPerPMLimit'])]]></search>
+		<add><![CDATA[if (!$context['no_attachment_limit'] && !empty($modSettings['attachmentNumPerPMLimit']) && $quantity > $modSettings['attachmentNumPerPMLimit'])]]></add>
+	</operation>
+	<operation error="ignore">
+		<search position="replace"><![CDATA[if (!empty($modSettings['attachmentPMLimit']) && $total_size > $modSettings['attachmentPMLimit'] * 1024)]]></search>
+		<add><![CDATA[if (!$context['no_attachment_limit'] && !empty($modSettings['attachmentPMLimit']) && $total_size > $modSettings['attachmentPMLimit'] * 1024)]]></add>
+	</operation>
+</file>
+<file name="$sourcedir/Post.php">
+	<operation>
+		<search position="replace"><![CDATA[// !!! These won't work if you're posting an event!]]></search>
+		<add><![CDATA[// Check to see if you have attachment limits :p
+	$context['no_attachment_limit'] = allowedTo('post_no_attachment_limit');
+	// !!! These won't work if you're posting an event!]]></add>
+	<operation>
+		<search position="replace"><![CDATA[if (!empty($modSettings['attachmentSizeLimit']) && $_FILES['attachment']['size'][$n] > $modSettings['attachmentSizeLimit'] * 1024)]]></search>
+		<add><![CDATA[if (!$context['no_attachment_limit'] && !empty($modSettings['attachmentSizeLimit']) && $_FILES['attachment']['size'][$n] > $modSettings['attachmentSizeLimit'] * 1024)]]></add>
+	</operation>
+	<operation>
+		<search position="replace"><![CDATA[if (!empty($modSettings['attachmentNumPerPostLimit']) && $quantity > $modSettings['attachmentNumPerPostLimit'])]]></search>
+		<add><![CDATA[if (!$context['no_attachment_limit'] && !empty($modSettings['attachmentNumPerPostLimit']) && $quantity > $modSettings['attachmentNumPerPostLimit'])]]></add>
+	</operation>
+	<operation>
+		<search position="replace"><![CDATA[if (!empty($modSettings['attachmentPostLimit']) && $total_size > $modSettings['attachmentPostLimit'] * 1024)]]></search>
+		<add><![CDATA[if (!$context['no_attachment_limit'] && !empty($modSettings['attachmentPostLimit']) && $total_size > $modSettings['attachmentPostLimit'] * 1024)]]></add>
+	</operation>
+	<operation>
+		<search position="replace"><![CDATA[if (!empty($modSettings['attachmentCheckExtensions']))]]></search>
+		<add><![CDATA[if (!$context['no_attachment_limit'] && !empty($modSettings['attachmentCheckExtensions']))]]></add>
+	</operation>
+	<operation>
+		<search position="replace"><![CDATA[$context['num_allowed_attachments'] = empty($modSettings['attachmentNumPerPostLimit']) ? 50 : min($modSettings['attachmentNumPerPostLimit'] - count($context['current_attachments']) + (isset($deleted_attachments) ? $deleted_attachments : 0), $modSettings['attachmentNumPerPostLimit']);]]></search>
+		<add><![CDATA[$context['num_allowed_attachments'] = ($context['no_attachment_limit'] || empty($modSettings['attachmentNumPerPostLimit'])) ? 50 : min($modSettings['attachmentNumPerPostLimit'] - count($context['current_attachments']) + (isset($deleted_attachments) ? $deleted_attachments : 0), $modSettings['attachmentNumPerPostLimit']);]]></add>
+	</operation>
+	<operation>
+		<search position="replace"><![CDATA[// No need!
+	$context['robot_no_index'] = true;]]></search>
+		<add><![CDATA[// No need!
+	$context['robot_no_index'] = true;
+	// Check to see if you have attachment limits :p
+	$context['no_attachment_limit'] = allowedTo('post_no_attachment_limit');]]></add>
+	</operation>
+	<operation>
+		<search position="replace"><![CDATA[if (!empty($modSettings['attachmentPostLimit']) && $total_size > $modSettings['attachmentPostLimit'] * 1024)]]></search>
+		<add><![CDATA[if (!$context['no_attachment_limit'] && !empty($modSettings['attachmentPostLimit']) && $total_size > $modSettings['attachmentPostLimit'] * 1024)]]></add>
+	</operation>
+	<operation>
+		<search position="replace"><![CDATA[if (!empty($modSettings['attachmentNumPerPostLimit']) && $quantity > $modSettings['attachmentNumPerPostLimit'])]]></search>
+		<add><![CDATA[if (!$context['no_attachment_limit'] && !empty($modSettings['attachmentNumPerPostLimit']) && $quantity > $modSettings['attachmentNumPerPostLimit'])]]></add>
+	</operation>
+</file>
+<file name="$sourcedir/Subs-Post.php">
+	<operation>
+		<search position="replace"><![CDATA[if (!empty($modSettings['attachmentSizeLimit']) && $attachmentOptions['size'] > $modSettings['attachmentSizeLimit'] * 1024)]]></search>
+		<add><![CDATA[$context['no_attachment_limit'] = allowedTo('post_no_attachment_limit');
+	if (!$context['no_attachment_limit'] && !empty($modSettings['attachmentSizeLimit']) && $attachmentOptions['size'] > $modSettings['attachmentSizeLimit'] * 1024)]]></add>
+	</operation>
+	<operation error="ignore">
+		<search position="replace"><![CDATA[if (!empty($modSettings['pmAttachmentSizeLimit']) && $pmAttachmentOptions['size'] > $modSettings['pmAttachmentSizeLimit'] * 1024)]]></search>
+		<add><![CDATA[$context['no_attachment_limit'] = allowedTo('pm_no_attachment_limit');
+	if (!$context['no_attachment_limit'] && !empty($modSettings['pmAttachmentSizeLimit']) && $pmAttachmentOptions['size'] > $modSettings['pmAttachmentSizeLimit'] * 1024)]]></add>
+	</operation>
+</file>
+<file name="$themedir/PersonalMessage.template.php">
+	<operation error="ignore">
+		<search position="replace"><![CDATA[if ($context['num_allowed_attachments'] > 1)]]></search>
+		<add><![CDATA[if ($context['no_attachment_limit'] || $context['num_allowed_attachments'] > 1)]]></add>
+	</operation>
+	<operation error="ignore">
+		<search position="replace"><![CDATA[var allowed_attachments = ', $context['num_allowed_attachments'], ' - 1;]]></search>
+		<add><![CDATA[var allowed_attachments = ', (empty($context['no_attachment_limit']) ? $context['num_allowed_attachments'] : 50), ' - 1;]]></add>
+	</operation>
+	<operation error="ignore">
+		<search position="replace"><![CDATA[if (!empty($modSettings['pmAttachmentCheckExtensions']))]]></search>
+		<add><![CDATA[if (!$context['no_attachment_limit'] && !empty($modSettings['pmAttachmentCheckExtensions']))]]></add>
+	</operation>
+	<operation error="ignore">
+		<search position="replace"><![CDATA[if (!empty($context['attachment_restrictions']))]]></search>
+		<add><![CDATA[if (!$context['no_attachment_limit'] && !empty($context['attachment_restrictions']))]]></add>
+	</operation>
+</file>
+<file name="$themedir/Post.template.php">
+	<operation>
+		<search position="replace"><![CDATA[if ($context['num_allowed_attachments'] > 1)]]></search>
+		<add><![CDATA[if ($context['no_attachment_limit'] || $context['num_allowed_attachments'] > 1)]]></add>
+	</operation>
+	<operation>
+		<search position="replace"><![CDATA[var allowed_attachments = ', $context['num_allowed_attachments'], ';]]></search>
+		<add><![CDATA[var allowed_attachments = ', (empty($context['no_attachment_limit']) ? $context['num_allowed_attachments'] : 50), ';]]></add>
+	</operation>
+	<operation>
+		<search position="replace"><![CDATA[if (!empty($modSettings['attachmentCheckExtensions']))]]></search>
+		<add><![CDATA[if (!$context['no_attachment_limit'] && !empty($modSettings['attachmentCheckExtensions']))]]></add>
+	</operation>
+	<operation>
+		<search position="replace"><![CDATA[if (!empty($context['attachment_restrictions']))]]></search>
+		<add><![CDATA[if (!$context['no_attachment_limit'] && !empty($context['attachment_restrictions']))]]></add>
+	</operation>
+</file>
+</modification>
