@@ -1,3 +1,7 @@
+v1.6 - July 5th, 2017
+o Added support for SMF 2.1 Beta 3.
+o Removed support for previous SMF 2.1 Betas.
+
 v1.5 - October 2nd, 2016
 o Fixed several undefined element errors found by [url=http://www.simplemachines.org/community/index.php?action=profile;u=332219]Westwegoman[/url].
 
