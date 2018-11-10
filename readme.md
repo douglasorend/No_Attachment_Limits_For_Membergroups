@@ -1,6 +1,6 @@
 ------
 
-# NO ATTACHMENT LIMITS FOR MEMBERGROUPS v1.7
+# NO ATTACHMENT LIMITS FOR MEMBERGROUPS v1.8
 
 [**By Dougiefresh**](http://www.simplemachines.org/community/index.php?action=profile;u=253913) -> [Link to Mod](http://custom.simplemachines.org/mods/index.php?mod=3997)
 

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+<modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
+<id>Dougiefresh:NoAttachLimit</id>
+<name>No Post or PM Attachment Limits for Admin</name>
+<version>1.8</version>
+
+<file name="$languagedir/ManagePermissions.spanish_latin.php" error="skip">
+	<operation>
+		<search position="end" />
+		<add><![CDATA[
+$txt['permissionname_post_no_attachment_limit'] = 'No hay l&iacute;mites de archivos adjuntos';
+$txt['permissionhelp_post_no_attachment_limit'] = 'Cuando se selecciona, los siguientes l&iacute;mites no se aplican a los grupos de miembros seleccionados:<br />o N&uacute;mero m&aacute;ximo de archivos adjuntos por publicación<br />o Tama&ntilde;o m&aacute;ximo del archivo adjunto<br />o Tama&ntilde;o m&aacute;ximo de todos los archivos adjuntos por publicación<br />o extensiones de adjuntos permitidos';
+$txt['permissionname_pm_no_attachment_limit'] = 'Sin l&iacute;mites de adjuntos en MP';
+$txt['permissionhelp_pm_no_attachment_limit'] = 'Cuando se selecciona, los siguientes l&iacute;mites no se aplican a los grupos de miembros seleccionados:<br />o N&uacute;mero m&aacute;ximo de archivos adjuntos por MP<br />o Tama&ntilde;o m&aacute;ximo del archivo adjunto<br />o Tama&ntilde;o m&aacute;ximo de todos los archivos adjuntos por MP<br />o extensiones de adjuntos permitidas';
+]]></add>
+	</operation>
+</file>
+<file name="$languagedir/ManagePermissions.spanish_latin-utf8.php" error="skip">
+	<operation>
+		<search position="end" />
+		<add><![CDATA[
+$txt['permissionname_post_no_attachment_limit'] = 'No hay límites de archivos adjuntos';
+$txt['permissionhelp_post_no_attachment_limit'] = 'Cuando se selecciona, los siguientes límites no se aplican a los grupos de miembros seleccionados:<br />o Número máximo de archivos adjuntos por publicación<br />o Tamaño máximo del archivo adjunto<br />o Tamaño máximo de todos los archivos adjuntos por publicación<br />o extensiones de adjuntos permitidos';
+$txt['permissionname_pm_no_attachment_limit'] = 'Sin límites de adjuntos en MP';
+$txt['permissionhelp_pm_no_attachment_limit'] = 'Cuando se selecciona, los siguientes límites no se aplican a los grupos de miembros seleccionados:<br />o Número máximo de archivos adjuntos por MP<br />o Tamaño máximo del archivo adjunto<br />o Tamaño máximo de todos los archivos adjuntos por MP<br />o extensiones de adjuntos permitidas';
+]]></add>
+	</operation>
+</file>
+</modification>
